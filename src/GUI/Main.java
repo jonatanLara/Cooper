@@ -6,8 +6,10 @@
 
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JPanel;
 
 /**
  *
@@ -91,6 +93,11 @@ public final class Main extends javax.swing.JFrame {
         jButton1.setFocusPainted(false);
         jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,6 +118,11 @@ public final class Main extends javax.swing.JFrame {
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.setFocusPainted(false);
         jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -197,6 +209,16 @@ public final class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Registro registro  = new Registro(null, true);
+        registro.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+        
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Proyectos proyectos = new Proyectos();
+        panel(proyectos);
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -244,4 +266,14 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
+    public void panel(JPanel panel){
+        PanelCentral.removeAll();
+        int w = PanelCentral.getWidth();
+        int h = PanelCentral.getHeight();
+        PanelCentral.setLayout(new BorderLayout());//Panel.setSize(822, 749);
+        panel.setPreferredSize(new Dimension(w, h));
+        PanelCentral.add("Center", panel);
+        PanelCentral.updateUI();
+        PanelCentral.validate();
+    }
 }

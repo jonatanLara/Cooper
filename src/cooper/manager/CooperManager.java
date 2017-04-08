@@ -7,6 +7,9 @@
 package cooper.manager;
 
 import GUI.Login;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -14,6 +17,16 @@ import GUI.Login;
  */
 public class CooperManager {
     public static void main(String[] args) {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(CooperManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
         new Login().setVisible(true);
     }
 }
