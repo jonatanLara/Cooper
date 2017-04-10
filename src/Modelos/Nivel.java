@@ -19,18 +19,19 @@ import java.util.ArrayList;
  * @author rodrigososa
  */
 public class Nivel {
+
   public static final String TABLA_NIVEL = "nivel";
-  public static final String ID="id";
+  public static final String ID = "id";
   public static final String NIVEL = "nivel";
   public static final String CREADO = "creado";
-  
+
   private Integer id = 0;
   private Integer nivel = 0;
   private LocalDate creado = null;
 
   public Nivel() {
   }
-  
+
   public Nivel(Integer id, Integer nivel, LocalDate creado) {
     this.id = id;
     this.nivel = nivel;
@@ -59,13 +60,13 @@ public class Nivel {
 
   public void setCreado(LocalDate creado) {
     this.creado = creado;
-  }      
+  }
 
   @Override
   public String toString() {
     return "Nivel{" + "id=" + id + ", nivel=" + nivel + ", creado=" + creado + '}';
   }
-  
+
   public Integer crearNivel(Nivel nivel, DatabaseConnection databaseConnection) throws SQLException {
     String query = "INSERT INTO " + TABLA_NIVEL + '('
             + NIVEL + ','
@@ -73,7 +74,7 @@ public class Nivel {
     PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
     preparedStatement.setInt(1, nivel.getNivel());
     preparedStatement.setDate(2, Date.valueOf(nivel.getCreado()));
-    
+
     preparedStatement.executeUpdate();
     ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
@@ -83,7 +84,7 @@ public class Nivel {
       return 0;
     }
   }
-  
+
   public ArrayList<Nivel> obtenerNiveles(DatabaseConnection databaseConnection) throws SQLException {
     ArrayList<Nivel> niveles = new ArrayList<>();
     String query = "SELECT * FROM " + TABLA_NIVEL;
@@ -91,7 +92,7 @@ public class Nivel {
     ResultSet resultSet = preparedStatement.executeQuery();
     if (resultSet != null) {
       resultSet.next();
-      while(resultSet.next()) {
+      while (resultSet.next()) {
         Nivel nivel = new Nivel(
                 resultSet.getInt(ID),
                 resultSet.getInt(NIVEL),
@@ -103,7 +104,6 @@ public class Nivel {
     } else {
       return null;
     }
+
   }
-  
-  
 }

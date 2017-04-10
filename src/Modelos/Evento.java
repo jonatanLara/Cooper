@@ -17,7 +17,7 @@ public class Evento {
   private static final String ACCION_ID_ACCION = "accion_id_accion";
   private static final String FECHA = "fecha";
   private static final String CREADO = "creado";
-  
+
   private Integer id = 0;
   private Integer usuario = 0;
   private Integer accion = 0;
@@ -79,7 +79,4 @@ public class Evento {
   public String toString() {
     return "Evento{" + "id=" + id + ", usuario=" + usuario + ", accion=" + accion + ", fecha=" + fecha + ", creado=" + creado + '}';
   }
-  
-  
-  
 }

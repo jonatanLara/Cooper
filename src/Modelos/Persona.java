@@ -44,9 +44,8 @@ public class Persona {
     this.idBanner = idBanner;
     this.creado = creado;
   }
-  
+
   public Persona(String nombre, String apellido, String correo, String idBanner, LocalDate creado) {
-    this.id = id;
     this.nombre = nombre;
     this.apellido = apellido;
     this.correo = correo;

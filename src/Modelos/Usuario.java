@@ -154,6 +154,5 @@ public class Usuario {
     } else {
       return 0;
     }
-  }
-  
+  }  
 }

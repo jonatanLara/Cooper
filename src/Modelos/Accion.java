@@ -15,7 +15,7 @@ public class Accion {
   private static final String ID_ACCION = "id_accion";
   private static final String ACCION = "accion";
   private static final String CREADO = "creado";
-  
+
   private Integer id = 0;
   private Integer accion = 0;
   private LocalDate creado = null;

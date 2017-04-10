@@ -24,11 +24,10 @@ public class DatabaseConnection {
     connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
     connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
   }
-
+  
   public Connection getConnection() {
     return connection;
   }
-  
   public void closeConnection() throws SQLException {
     if (connection != null) {
       connection.close();

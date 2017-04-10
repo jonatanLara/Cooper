@@ -43,7 +43,6 @@ public class Conexion {
         try {
             String controlador = "com.mysql.jdbc.Driver";
             Class.forName(controlador).newInstance();
-            
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             System.out.println("Error de controlador posiblemente no tenga esta libreria");
         }
@@ -60,7 +59,6 @@ public class Conexion {
             //notify.notifyConection("Conexion ", "Conexion exitosa",true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "se produjo un problema al conectar con la base de datos");
-            
         }
     }
     
