@@ -5,7 +5,6 @@
  */
 package Vistas;
 
-import Clases.Conexion;
 import Persistencia.Autenticacion;
 import Persistencia.DatabaseConnection;
 import java.sql.SQLException;
@@ -21,7 +20,6 @@ public final class Login extends javax.swing.JFrame {
 
   private String user;
   private String pass;
-  private final Conexion conexion = new Conexion();
 
   public Login() {
     initComponents();

@@ -229,21 +229,22 @@ public class PanelRegistroUsuario extends javax.swing.JPanel {
         int nivelSeleccionado = 0;
         for(Nivel nivel: niveles) {
            if (levelCb.getSelectedItem().toString().equals(nivel.getNivel().toString())) {
-            nivelSeleccionado = nivel.getNivel();
+                nivelSeleccionado = nivel.getNivel();
           }
         }
         if (idPersona != 0) {
           Usuario usuario = new Usuario(
                   userEt.getText().trim(),
                   passwordEt.getText().trim(),
-                  nivelSeleccionado,
+                  levelCb.getSelectedIndex()+1,
                   Integer.parseInt(String.valueOf(idPersona)),
                   LocalDate.now()
           );
-           
+            System.out.println("nivel" +levelCb.getSelectedIndex());
           long idUsuario = usuario.crearUsuario(databaseConnection);
           if (idUsuario != 0) {
             JOptionPane.showMessageDialog(this, "Usuario creado correctamente");
+            clean();
           } else {
             JOptionPane.showMessageDialog(this, "Error guardando usuario");
           }
@@ -309,4 +310,12 @@ public class PanelRegistroUsuario extends javax.swing.JPanel {
     private javax.swing.JButton registerBtn;
     private javax.swing.JTextField userEt;
     // End of variables declaration//GEN-END:variables
+    public void clean(){
+       nameEt.setText(null);
+       lastNameEt.setText(null);
+       emailEt.setText(null);
+       bannerEt.setText(null);
+       userEt.setText(null);
+       passwordEt.setText(null);  
+    }
 }
