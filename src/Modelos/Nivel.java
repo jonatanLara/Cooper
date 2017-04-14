@@ -91,7 +91,8 @@ public class Nivel {
     PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(query);
     ResultSet resultSet = preparedStatement.executeQuery();
     if (resultSet != null) {
-      resultSet.next();
+      //resultSet.next();
+        resultSet.beforeFirst();
       while (resultSet.next()) {
         Nivel nivel = new Nivel(
                 resultSet.getInt(ID),

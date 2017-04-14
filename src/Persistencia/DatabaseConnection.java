@@ -35,4 +35,5 @@ public class DatabaseConnection {
       JOptionPane.showMessageDialog(null, "No se pudo cerrar la conexión a base de datos, comunícate con el desarrollador");
     }
   }
+  
 }
