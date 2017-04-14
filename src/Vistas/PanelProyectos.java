@@ -16,6 +16,7 @@ public class PanelProyectos extends javax.swing.JPanel {
    */
   public PanelProyectos() {
     initComponents();
+    bteliminar.setEnabled(false);
   }
 
   /**
@@ -29,8 +30,8 @@ public class PanelProyectos extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btRegistro = new javax.swing.JButton();
+        bteliminar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -52,33 +53,33 @@ public class PanelProyectos extends javax.swing.JPanel {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setFocusPainted(false);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recuros/add-user-symbol (1).png"))); // NOI18N
-        jButton2.setText("Registro");
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setFocusPainted(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btRegistro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btRegistro.setForeground(new java.awt.Color(255, 255, 255));
+        btRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recuros/add-user-symbol (1).png"))); // NOI18N
+        btRegistro.setText("Registro");
+        btRegistro.setBorder(null);
+        btRegistro.setBorderPainted(false);
+        btRegistro.setContentAreaFilled(false);
+        btRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btRegistro.setFocusPainted(false);
+        btRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btRegistroActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recuros/delete.png"))); // NOI18N
-        jButton3.setText("Eliminar proyecto");
-        jButton3.setBorder(null);
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setFocusPainted(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bteliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        bteliminar.setForeground(new java.awt.Color(255, 255, 255));
+        bteliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recuros/delete.png"))); // NOI18N
+        bteliminar.setText("Eliminar proyecto");
+        bteliminar.setBorder(null);
+        bteliminar.setBorderPainted(false);
+        bteliminar.setContentAreaFilled(false);
+        bteliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bteliminar.setFocusPainted(false);
+        bteliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bteliminarActionPerformed(evt);
             }
         });
 
@@ -90,9 +91,9 @@ public class PanelProyectos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(bteliminar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -101,8 +102,8 @@ public class PanelProyectos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btRegistro)
+                    .addComponent(bteliminar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -174,19 +175,20 @@ public class PanelProyectos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-  private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+  private void btRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistroActionPerformed
+      //registro de proyecto!
+      new Proyecto(null, true).setVisible(true);
+  }//GEN-LAST:event_btRegistroActionPerformed
 
-  }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bteliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteliminarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_bteliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btRegistro;
+    private javax.swing.JButton bteliminar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
