@@ -52,6 +52,7 @@ public final class Main extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         btPeriodo = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         PanelFooter = new javax.swing.JPanel();
         PanelCentral = new javax.swing.JPanel();
 
@@ -151,12 +152,22 @@ public final class Main extends javax.swing.JFrame {
         btPeriodo.setText("Periodo");
         btPeriodo.setBorderPainted(false);
         btPeriodo.setContentAreaFilled(false);
+        btPeriodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btPeriodo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btPeriodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btPeriodoActionPerformed(evt);
             }
         });
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recuros/progress-report.png"))); // NOI18N
+        jButton5.setText("Reportes");
+        jButton5.setBorderPainted(false);
+        jButton5.setContentAreaFilled(false);
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout PanelMenuLayout = new javax.swing.GroupLayout(PanelMenu);
         PanelMenu.setLayout(PanelMenuLayout);
@@ -169,7 +180,8 @@ public final class Main extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btPeriodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btPeriodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PanelMenuLayout.setVerticalGroup(
@@ -185,7 +197,9 @@ public final class Main extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btPeriodo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         container.add(PanelMenu, java.awt.BorderLayout.LINE_START);
@@ -219,7 +233,7 @@ public final class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
         );
 
         pack();
@@ -236,7 +250,13 @@ public final class Main extends javax.swing.JFrame {
   }//GEN-LAST:event_jButton3ActionPerformed
 
   private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    // TODO add your handling code here:
+    int ancho = PanelCentral.getWidth();
+    int alto = PanelCentral.getHeight();
+
+    PanelCarreras panelCarreras = new PanelCarreras();
+    panelCarreras.setSize(ancho, alto);
+
+    asignarPanel(panelCarreras);
   }//GEN-LAST:event_jButton4ActionPerformed
 
   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -260,7 +280,13 @@ public final class Main extends javax.swing.JFrame {
   }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPeriodoActionPerformed
-        
+    int ancho = PanelCentral.getWidth();
+    int alto = PanelCentral.getHeight();
+
+    PanelPeriodo panelPeriodo = new PanelPeriodo();
+    panelPeriodo.setSize(ancho, alto);
+
+    asignarPanel(panelPeriodo);
     }//GEN-LAST:event_btPeriodoActionPerformed
 
   private void asignarPanel(JPanel jPanel) {
@@ -316,6 +342,7 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
