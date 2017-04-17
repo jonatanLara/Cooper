@@ -38,15 +38,15 @@ public class Proyectos {
     private String nombreAlumno;
     private String idbanner;
     private String cuatrimestre;
-    private String carrera;
-    private String institucion;
+    private int  carrera;
+    private int institucion;
     private LocalDate creado;
     private String asesorEmpresarial;
     private String asesorAcademico;
     
     public Proyectos(){}
 
-    public Proyectos(String periodo, String nombreProyecto, String imagen, String nombreAlumno, String idbanner, String cuatrimestre, String carrera, String institucion, LocalDate creado, String asesorEmpresarial, String asesorAcademico) {
+    public Proyectos(String periodo, String nombreProyecto, String imagen, String nombreAlumno, String idbanner, String cuatrimestre, int carrera, int institucion, LocalDate creado, String asesorEmpresarial, String asesorAcademico) {
         this.periodo = periodo;
         this.nombreProyecto = nombreProyecto;
         this.imagen = imagen;
@@ -76,7 +76,7 @@ public class Proyectos {
             + ASESOR_EMPRESARIAL + ','
             + ASESOR_ACADEMICO
             + ')'
-            + " VALUES(?,?,?,?,?)";
+            + " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
     PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
     preparedStatement.setString(1, this.getPeriodo());
@@ -85,8 +85,8 @@ public class Proyectos {
     preparedStatement.setString(4, this.getNombreAlumno());
     preparedStatement.setString(5, this.getIdbanner());
     preparedStatement.setString(6, this.getCuatrimestre());
-    preparedStatement.setString(7, this.getCarrera());
-    preparedStatement.setString(8, this.getInstitucion());
+    preparedStatement.setInt(7, this.getCarrera());
+    preparedStatement.setInt(8, this.getInstitucion());
     preparedStatement.setString(10, this.getAsesorEmpresarial());
     preparedStatement.setString(11, this.getAsesorAcademico());
     preparedStatement.setDate(9, Date.valueOf(this.getCreado()));
@@ -145,14 +145,14 @@ public class Proyectos {
     /**
      * @return the carrera
      */
-    public String getCarrera() {
+    public int getCarrera() {
         return carrera;
     }
 
     /**
      * @return the institucion
      */
-    public String getInstitucion() {
+    public int getInstitucion() {
         return institucion;
     }
 

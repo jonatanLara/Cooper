@@ -5,6 +5,12 @@
  */
 package Vistas;
 
+import Persistencia.DatabaseConnection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rodrigososa
@@ -17,6 +23,7 @@ public class PanelProyectos extends javax.swing.JPanel {
   public PanelProyectos() {
     initComponents();
     bteliminar.setEnabled(false);
+    llenarCombo(tabla, "proyecto");
   }
 
   /**
@@ -34,7 +41,7 @@ public class PanelProyectos extends javax.swing.JPanel {
         bteliminar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(59, 89, 152));
@@ -109,7 +116,7 @@ public class PanelProyectos extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(59, 89, 152));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -120,7 +127,7 @@ public class PanelProyectos extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabla);
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -193,6 +200,40 @@ public class PanelProyectos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
+    public void llenarCombo(JTable jtabla, String tabla) {
+        DatabaseConnection connection;
+        String columnas[] = {"Ciclo°","Nombre del Proyecto", "ID", "Alumno","Cuatrimestre", "SRN°","Empresa"};
+        String filas[][] = {};
+        javax.swing.table.DefaultTableModel modelo = new DefaultTableModel(filas, columnas);
+        Object datos[];
+        try {
+            connection = new DatabaseConnection();
+            String query = "SELECT proyecto.uuid,nombre_proyecto,id_banner_alumno, nombre_alumno, cuatrimestre, carrera.nombre, empresa.nombre FROM proyecto INNER JOIN carrera ON carrera.id = proyecto.carrera INNER JOIN empresa ON empresa.id = proyecto.convenio";
+            PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query);
+        
+            ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet != null) {
+                  //resultSet.next();
+                    resultSet.beforeFirst();
+                    while (resultSet.next()) {
+                    datos = new Object[7];
+                    datos[0] = resultSet.getString("proyecto.uuid");
+                    datos[1] = resultSet.getString("nombre_proyecto");
+                    datos[2] = resultSet.getString("id_banner_alumno");
+                    datos[3] = resultSet.getString("nombre_alumno");
+                    datos[4] = resultSet.getString("cuatrimestre");
+                    datos[5] = resultSet.getString("carrera.nombre");
+                    datos[6] = resultSet.getString("empresa.nombre");
+                    
+                    modelo.addRow(datos);
+             //conn.Desconectar();
+                  }
+                }
+            } catch (Exception e) {
+            }
+        jtabla.setModel(modelo);
+        jScrollPane1.setViewportView(jtabla);
+    }
 }

@@ -154,7 +154,7 @@ public class Proyecto extends javax.swing.JDialog {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("CUATRIMESTRE");
 
-        ComboBoxCuatrimestre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PRIMERO", "SEGUNDO", "TERCERO", "CUARTO", "QUINTO", "SEXTO", "SÉPTIMO", "OCTAVO", "NODEVENO", "DÉCIMO", "UNDÉCIMO", "DUODÉCIMO" }));
+        ComboBoxCuatrimestre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SEXTO", "SÉPTIMO", "OCTAVO", "NODEVENO", "DÉCIMO", "UNDÉCIMO", "DUODÉCIMO" }));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,7 +162,7 @@ public class Proyecto extends javax.swing.JDialog {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText(".....");
+        jLabel12.setText("seleccione un archivo");
 
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recuros/document.png"))); // NOI18N
@@ -309,19 +309,25 @@ public class Proyecto extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Debes llenar todos los campos correctamente");
         }else{
             try {
-                Proyectos classProyectos;
-                classProyectos = new Proyectos((
-                        String) comboboxPeriodo.getSelectedItem()
+                Proyectos classProyectos = new Proyectos(
+                        (String) comboboxPeriodo.getSelectedItem().toString()
                         , txtNombreProyecto.getText().trim()
                         , "imagen"
                         , txtNombreAlumno.getText().trim()
                         , txtIdBanner.getText().trim()
-                        , (String) ComboBoxCuatrimestre.getSelectedItem()
-                        , (String) ComboBoxCarrera.getSelectedItem()
-                        , (String) ComboBoxEmpresa.getSelectedItem()
+                        , ComboBoxCuatrimestre.getSelectedItem().toString()
+                        , ComboBoxCarrera.getSelectedIndex()+1
+                        , ComboBoxEmpresa.getSelectedIndex()+1
                         , LocalDate.now()
                         , txtAsesorEmpresarial.getText().trim()
                         , txtAsesorAcademico.getText().trim());
+                DatabaseConnection connection = new DatabaseConnection();
+                long respuesta = classProyectos.crearPersona(connection);
+                if (respuesta!= 0) {
+                    JOptionPane.showMessageDialog(this, "Usuario creado correctamente");
+                  } else {
+                    JOptionPane.showMessageDialog(this, "Error guardando usuario");
+                  }
             } catch (Exception e) {
             }
         }
