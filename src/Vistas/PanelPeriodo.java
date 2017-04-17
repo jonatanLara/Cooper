@@ -5,6 +5,11 @@
  */
 package Vistas;
 
+import Persistencia.DatabaseConnection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rodrigososa
@@ -16,6 +21,7 @@ public class PanelPeriodo extends javax.swing.JPanel {
    */
   public PanelPeriodo() {
     initComponents();
+    llenarTabla();
   }
 
   /**
@@ -181,4 +187,37 @@ public class PanelPeriodo extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    public void llenarTabla() {
+        DatabaseConnection connection;
+        String columnas[] = {"Contacto","Fecha del Convenio","Empresa/Institución","Fecha de alta"};
+        String filas[][] = {};
+        javax.swing.table.DefaultTableModel modelo = new DefaultTableModel(filas, columnas);
+        Object datos[];
+        try {
+            connection = new DatabaseConnection();
+            String query = "SELECT asesor_empresarial,fecha_convenio,empresa.nombre, convenio.creado FROM convenio \n" +
+"INNER JOIN empresa ON convenio.id = empresa.id";
+            PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query);
+        
+            ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet != null) {
+                  //resultSet.next();
+                    resultSet.beforeFirst();
+                    while (resultSet.next()) {
+                    datos = new Object[4];
+                    datos[0] = resultSet.getString("asesor_empresarial");
+                    datos[1] = resultSet.getString("fecha_convenio");
+                    datos[2] = resultSet.getString("empresa.nombre");
+                    datos[3] = resultSet.getString("convenio.creado");
+                    
+                    
+                    modelo.addRow(datos);
+             //conn.Desconectar();
+                  }
+                }
+            } catch (Exception e) {
+            }
+        jTable1.setModel(modelo);
+        jScrollPane1.setViewportView(jTable1);
+    }
 }

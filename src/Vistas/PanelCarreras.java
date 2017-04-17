@@ -5,6 +5,12 @@
  */
 package Vistas;
 
+import Persistencia.DatabaseConnection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rodrigososa
@@ -16,6 +22,7 @@ public class PanelCarreras extends javax.swing.JPanel {
    */
   public PanelCarreras() {
     initComponents();
+    llenarTabla();
   }
 
   /**
@@ -181,4 +188,35 @@ public class PanelCarreras extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+     public void llenarTabla() {
+        DatabaseConnection connection;
+        String columnas[] = {"CRN","Nombre","Año", "Creado"};
+        String filas[][] = {};
+        javax.swing.table.DefaultTableModel modelo = new DefaultTableModel(filas, columnas);
+        Object datos[];
+        try {
+            connection = new DatabaseConnection();
+            String query = "SELECT * FROM carrera";
+            PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query);
+        
+            ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet != null) {
+                  //resultSet.next();
+                    resultSet.beforeFirst();
+                    while (resultSet.next()) {
+                    datos = new Object[5];
+                    datos[0] = resultSet.getString("uuid");
+                    datos[1] = resultSet.getString("nombre");
+                    datos[2] = resultSet.getString("ano");
+                    datos[3] = resultSet.getString("creado");
+                    
+                    modelo.addRow(datos);
+             //conn.Desconectar();
+                  }
+                }
+            } catch (Exception e) {
+            }
+        jTable1.setModel(modelo);
+        jScrollPane1.setViewportView(jTable1);
+    }
 }

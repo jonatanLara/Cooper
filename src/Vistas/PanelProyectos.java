@@ -8,6 +8,7 @@ package Vistas;
 import Persistencia.DatabaseConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,8 +23,8 @@ public class PanelProyectos extends javax.swing.JPanel {
    */
   public PanelProyectos() {
     initComponents();
-    bteliminar.setEnabled(false);
-    llenarCombo(tabla, "proyecto");
+    //bteliminar.setEnabled(false);
+    llenarTabla(tabla, "proyecto");
   }
 
   /**
@@ -42,7 +43,7 @@ public class PanelProyectos extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
+        btnDetalle = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(59, 89, 152));
 
@@ -129,13 +130,18 @@ public class PanelProyectos extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recuros/document.png"))); // NOI18N
-        jButton4.setText("Detalle de proyecto");
-        jButton4.setBorderPainted(false);
-        jButton4.setContentAreaFilled(false);
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetalle.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDetalle.setForeground(new java.awt.Color(255, 255, 255));
+        btnDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recuros/document.png"))); // NOI18N
+        btnDetalle.setText("Detalle de proyecto");
+        btnDetalle.setBorderPainted(false);
+        btnDetalle.setContentAreaFilled(false);
+        btnDetalle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -146,7 +152,7 @@ public class PanelProyectos extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(btnDetalle)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -156,7 +162,7 @@ public class PanelProyectos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btnDetalle)
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
@@ -188,21 +194,42 @@ public class PanelProyectos extends javax.swing.JPanel {
   }//GEN-LAST:event_btRegistroActionPerformed
 
     private void bteliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteliminarActionPerformed
-        // TODO add your handling code here:
+        int row = tabla.getSelectedRow();
+        if (row<0) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar algun dato de la tabla");
+        }
+        else{
+            int confirmar = JOptionPane.showConfirmDialog(null, "Estas seguro de eliminar esta fila");
+            if (JOptionPane.OK_OPTION==confirmar) {
+                //eliminar
+                
+            }
+        }
     }//GEN-LAST:event_bteliminarActionPerformed
+
+    private void btnDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleActionPerformed
+        int row = tabla.getSelectedRow();
+        if (row<0) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar algun dato de la tabla");
+        }
+        else{
+            String id = (String) tabla.getValueAt(row, 2).toString();
+            new Detalles(null, true, id).setVisible(true);
+        }
+    }//GEN-LAST:event_btnDetalleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btRegistro;
     private javax.swing.JButton bteliminar;
+    private javax.swing.JButton btnDetalle;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
-    public void llenarCombo(JTable jtabla, String tabla) {
+    public void llenarTabla(JTable jtabla, String tabla) {
         DatabaseConnection connection;
         String columnas[] = {"Ciclo°","Nombre del Proyecto", "ID", "Alumno","Cuatrimestre", "SRN°","Empresa"};
         String filas[][] = {};

@@ -5,6 +5,11 @@
  */
 package Vistas;
 
+import Persistencia.DatabaseConnection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rodrigososa
@@ -16,6 +21,7 @@ public class PanelConvenios extends javax.swing.JPanel {
    */
   public PanelConvenios() {
     initComponents();
+    llenarTabla();
   }
 
   /**
@@ -181,4 +187,37 @@ public class PanelConvenios extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+     public void llenarTabla() {
+        DatabaseConnection connection;
+        String columnas[] = {"Empresa/Institución","Contacto","Tel","Correo","Fecha del Convenio"};
+        String filas[][] = {};
+        javax.swing.table.DefaultTableModel modelo = new DefaultTableModel(filas, columnas);
+        Object datos[];
+        try {
+            connection = new DatabaseConnection();
+            String query = "SELECT asesor_empresarial, fecha_convenio, empresa.nombre, empresa.numero_telefonico, empresa.correo FROM empresa INNER JOIN convenio ON empresa.id = convenio.empresa";
+            PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query);
+        
+            ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet != null) {
+                  //resultSet.next();
+                    resultSet.beforeFirst();
+                    while (resultSet.next()) {
+                    datos = new Object[5];
+                    datos[0] = resultSet.getString("empresa.nombre");
+                    datos[1] = resultSet.getString("asesor_empresarial");
+                    datos[2] = resultSet.getString("empresa.numero_telefonico");
+                    datos[3] = resultSet.getString("empresa.correo");
+                    datos[4] = resultSet.getString("fecha_convenio");
+                    
+                    
+                    modelo.addRow(datos);
+             //conn.Desconectar();
+                  }
+                }
+            } catch (Exception e) {
+            }
+        jTable1.setModel(modelo);
+        jScrollPane1.setViewportView(jTable1);
+    }
 }
